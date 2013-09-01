@@ -1,0 +1,11 @@
+--- fs/ubifs/dir.c	2012-06-01 16:18:44.000000000 +0900
++++ fs/ubifs/dir.c	2013-08-15 14:57:16.000000000 +0900
+@@ -1001,7 +1025,7 @@
+ 	struct ubifs_budget_req ino_req = { .dirtied_ino = 1,
+ 			.dirtied_ino_d = ALIGN(old_inode_ui->data_len, 8) };
+ 	struct timespec time;
+-	unsigned int saved_nlink;
++	unsigned int uninitialized_var(saved_nlink);
+ 
+ 	/*
+ 	 * Budget request settings: deletion direntry, new direntry, removing

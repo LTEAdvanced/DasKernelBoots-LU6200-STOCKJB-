@@ -1,0 +1,10 @@
+--- drivers/cpufreq/cpufreq_stats.c	2012-06-01 16:18:44.000000000 +0900
++++ drivers/cpufreq/cpufreq_stats.c	2013-08-15 14:57:16.000000000 +0900
+@@ -328,6 +328,7 @@
+ 		cpufreq_update_policy(cpu);
+ 		break;
+ 	case CPU_DOWN_PREPARE:
++	case CPU_DOWN_PREPARE_FROZEN:
+ 		cpufreq_stats_free_sysfs(cpu);
+ 		break;
+ 	case CPU_DEAD:

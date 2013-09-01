@@ -1,0 +1,11 @@
+--- net/bluetooth/rfcomm/sock.c	2012-06-01 16:18:44.000000000 +0900
++++ net/bluetooth/rfcomm/sock.c	2013-08-15 14:57:16.000000000 +0900
+@@ -522,7 +522,7 @@
+ 
+ 		release_sock(sk);
+ 		timeo = schedule_timeout(timeo);
+-		lock_sock(sk);
++		lock_sock_nested(sk, SINGLE_DEPTH_NESTING);
+ 	}
+ 	__set_current_state(TASK_RUNNING);
+ 	remove_wait_queue(sk_sleep(sk), &wait);

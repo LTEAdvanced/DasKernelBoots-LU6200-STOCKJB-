@@ -1,0 +1,19 @@
+--- net/bluetooth/hci_core.c	2012-06-01 16:18:44.000000000 +0900
++++ net/bluetooth/hci_core.c	2013-08-15 14:57:16.000000000 +0900
+@@ -1120,11 +1122,15 @@
+ static void hci_power_on(struct work_struct *work)
+ {
+ 	struct hci_dev *hdev = container_of(work, struct hci_dev, power_on);
++	int err;
+ 
+ 	BT_DBG("%s", hdev->name);
+ 
+-	if (hci_dev_open(hdev->id) < 0)
++	err = hci_dev_open(hdev->id);
++	if (err < 0) {
++		mgmt_set_powered_failed(hdev, err);
+ 		return;
++	}
+ 
+ 	if (test_bit(HCI_AUTO_OFF, &hdev->dev_flags))
+ 		schedule_delayed_work(&hdev->power_off,

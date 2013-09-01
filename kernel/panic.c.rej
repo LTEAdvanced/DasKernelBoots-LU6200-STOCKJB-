@@ -1,0 +1,11 @@
+--- kernel/panic.c	2012-06-01 16:18:44.000000000 +0900
++++ kernel/panic.c	2013-08-15 14:57:16.000000000 +0900
+@@ -123,6 +129,8 @@
+ 	 */
+ 	smp_send_stop();
+ 
++	kmsg_dump(KMSG_DUMP_PANIC);
++
+ 	atomic_notifier_call_chain(&panic_notifier_list, 0, buf);
+ 
+ 	bust_spinlocks(0);

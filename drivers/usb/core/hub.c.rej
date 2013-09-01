@@ -1,0 +1,10 @@
+--- drivers/usb/core/hub.c	2012-06-01 16:18:44.000000000 +0900
++++ drivers/usb/core/hub.c	2013-08-15 14:57:16.000000000 +0900
+@@ -24,6 +24,7 @@
+ #include <linux/kthread.h>
+ #include <linux/mutex.h>
+ #include <linux/freezer.h>
++#include <linux/random.h>
+ 
+ #include <asm/uaccess.h>
+ #include <asm/byteorder.h>

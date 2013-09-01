@@ -1,0 +1,11 @@
+--- drivers/mmc/core/sdio.c	2012-05-21 07:29:13.000000000 +0900
++++ drivers/mmc/core/sdio.c	2012-06-01 16:18:44.000000000 +0900
+@@ -947,7 +947,7 @@
+ 	}
+ 
+ 	if (!err && host->sdio_irqs)
+-		mmc_signal_sdio_irq(host);
++		wake_up_process(host->sdio_irq_thread);
+ 	mmc_release_host(host);
+ 
+ 	/*

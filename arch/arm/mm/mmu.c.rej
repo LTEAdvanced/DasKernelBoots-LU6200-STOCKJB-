@@ -1,0 +1,10 @@
+--- arch/arm/mm/mmu.c	2012-06-01 16:18:44.000000000 +0900
++++ arch/arm/mm/mmu.c	2013-08-15 14:57:16.000000000 +0900
+@@ -1137,6 +1210,7 @@
+ 	 */
+ 	if (mdesc->map_io)
+ 		mdesc->map_io();
++	fill_pmd_gaps();
+ 
+ 	/*
+ 	 * Finally flush the caches and tlb to ensure that we're in a

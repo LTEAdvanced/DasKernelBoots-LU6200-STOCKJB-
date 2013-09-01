@@ -1,0 +1,11 @@
+--- drivers/base/bus.c	2012-06-01 16:18:44.000000000 +0900
++++ drivers/base/bus.c	2013-08-15 14:57:16.000000000 +0900
+@@ -328,7 +328,7 @@
+ 	struct klist_iter i;
+ 	struct device *dev;
+ 
+-	if (!bus)
++	if (!bus || !bus->p)
+ 		return NULL;
+ 
+ 	klist_iter_init_node(&bus->p->klist_devices, &i,

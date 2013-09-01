@@ -1,0 +1,11 @@
+--- drivers/gpu/drm/radeon/radeon_mode.h	2012-06-01 16:18:44.000000000 +0900
++++ drivers/gpu/drm/radeon/radeon_mode.h	2013-08-15 14:57:16.000000000 +0900
+@@ -527,7 +528,7 @@
+ 				u8 val);
+ extern void radeon_router_select_ddc_port(struct radeon_connector *radeon_connector);
+ extern void radeon_router_select_cd_port(struct radeon_connector *radeon_connector);
+-extern bool radeon_ddc_probe(struct radeon_connector *radeon_connector);
++extern bool radeon_ddc_probe(struct radeon_connector *radeon_connector, bool use_aux);
+ extern int radeon_ddc_get_modes(struct radeon_connector *radeon_connector);
+ 
+ extern struct drm_encoder *radeon_best_encoder(struct drm_connector *connector);

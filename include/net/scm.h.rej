@@ -1,0 +1,15 @@
+--- include/net/scm.h	2012-06-01 16:18:44.000000000 +0900
++++ include/net/scm.h	2013-08-15 14:57:16.000000000 +0900
+@@ -71,9 +71,11 @@
+ }
+ 
+ static __inline__ int scm_send(struct socket *sock, struct msghdr *msg,
+-			       struct scm_cookie *scm)
++			       struct scm_cookie *scm, bool forcecreds)
+ {
+ 	memset(scm, 0, sizeof(*scm));
++	if (forcecreds)
++		scm_set_cred(scm, task_tgid(current), current_cred());
+ 	unix_get_peersec_dgram(sock, scm);
+ 	if (msg->msg_controllen <= 0)
+ 		return 0;

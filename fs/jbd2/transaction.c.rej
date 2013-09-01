@@ -1,0 +1,12 @@
+--- fs/jbd2/transaction.c	2012-06-01 16:18:44.000000000 +0900
++++ fs/jbd2/transaction.c	2013-08-15 14:57:16.000000000 +0900
+@@ -209,7 +209,8 @@
+ 		if (!new_transaction)
+ 			goto alloc_transaction;
+ 		write_lock(&journal->j_state_lock);
+-		if (!journal->j_running_transaction) {
++		if (!journal->j_running_transaction &&
++		    !journal->j_barrier_count) {
+ 			jbd2_get_transaction(journal, new_transaction);
+ 			new_transaction = NULL;
+ 		}

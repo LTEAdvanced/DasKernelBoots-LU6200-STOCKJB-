@@ -1,0 +1,10 @@
+--- kernel/power/suspend.c	2012-06-01 16:18:44.000000000 +0900
++++ kernel/power/suspend.c	2013-08-15 14:57:16.000000000 +0900
+@@ -24,6 +24,7 @@
+ #include <linux/export.h>
+ #include <linux/suspend.h>
+ #include <linux/syscore_ops.h>
++#include <linux/ftrace.h>
+ #include <trace/events/power.h>
+ 
+ #include "power.h"

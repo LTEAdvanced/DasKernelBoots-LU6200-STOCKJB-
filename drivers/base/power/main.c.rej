@@ -1,0 +1,29 @@
+--- drivers/base/power/main.c	2012-06-01 16:18:44.000000000 +0900
++++ drivers/base/power/main.c	2013-08-15 14:57:16.000000000 +0900
+@@ -979,8 +979,16 @@
+ int dpm_suspend_end(pm_message_t state)
+ {
+ 	int error = dpm_suspend_late(state);
++	if (error)
++		return error;
+ 
+-	return error ? : dpm_suspend_noirq(state);
++	error = dpm_suspend_noirq(state);
++	if (error) {
++		dpm_resume_early(resume_event(state));
++		return error;
++	}
++
++	return 0;
+ }
+ EXPORT_SYMBOL_GPL(dpm_suspend_end);
+ 
+@@ -1087,6 +1095,8 @@
+ 	}
+ 
+ 	device_unlock(dev);
++
++ Complete:
+ 	complete_all(&dev->power.completion);
+ 
+ 	if (error) {

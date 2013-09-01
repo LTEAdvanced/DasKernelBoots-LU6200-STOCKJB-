@@ -1,0 +1,12 @@
+--- arch/arm/kernel/smp.c	2012-06-01 16:18:44.000000000 +0900
++++ arch/arm/kernel/smp.c	2013-08-15 14:57:16.000000000 +0900
+@@ -596,7 +602,8 @@
+ 
+ 	cpumask_copy(&mask, cpu_online_mask);
+ 	cpumask_clear_cpu(smp_processor_id(), &mask);
+-	smp_cross_call(&mask, IPI_CPU_STOP);
++	if (!cpumask_empty(&mask))
++		smp_cross_call(&mask, IPI_CPU_STOP);
+ 
+ 	/* Wait up to one second for other CPUs to stop */
+ 	timeout = USEC_PER_SEC;
